@@ -10,12 +10,12 @@
                  [org.clojure/clojurescript "1.9.229"]
                  [rum "0.10.8"]
                  [cljs-ajax "0.6.0"]
-                 [org.clojure/data.json "0.2.6"]
-                 [org.clojure/core.async  "0.3.442"
+                 ;[org.clojure/data.json "0.2.6"]
+                 [org.clojure/core.async "0.3.442"
                   :exclusions [org.clojure/tools.reader]]]
 
   :plugins [[lein-figwheel "0.5.10"]
-            [lein-gorilla "0.4.0"]
+            ;[lein-gorilla "0.4.0"]
             [lein-cljsbuild "1.1.5" :exclusions [[org.clojure/clojure]]]]
 
   :source-paths ["src"]

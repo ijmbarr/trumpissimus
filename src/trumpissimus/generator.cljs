@@ -87,18 +87,35 @@
 
 (defn doit [c1 c2] (tidy (generate c1 c2)))
 
+;(defn handler-load-atom
+;  [atom]
+;  (fn [response]
+;    (println (take 50 response))
+;    (if true
+;      (reset! atom (fix-keys (js->clj (.parse js/JSON response))))
+;      (.error js/console (str response)))))
+
 (defn handler-load-atom
-  [atom]
-  (fn [[ok response]]
-    (if ok
+    [atom button-atom]
+    (fn [response]
       (reset! atom (fix-keys response))
-      (.error js/console (str response)))))
+      (reset! button-atom "Generate")))
+
 
 (defn load-text
   [filename handler]
-  (aj/ajax-request
-    {:uri             (str "texts/" filename)
-     :method          :get
-     :handler         handler
-     :format          (aj/json-request-format)
-     :response-format (aj/json-response-format {:keywords? false})}))
+  (aj/GET (str "texts/" filename) {:handler handler}))
+
+; (def a (atom nil))
+; (load-text "trump.json" (handler-load-atom a))
+
+
+;(defn load-text
+;  [filename handler]
+;  (aj/ajax-request
+;    {:uri     (str "texts/" filename)
+;     :method  :get
+;     :handler handler
+;     ;     :format          (aj/json-request-format)
+;     ; :response-format (aj/json-response-format {:keywords? false})
+;     }))
