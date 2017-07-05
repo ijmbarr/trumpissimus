@@ -20,7 +20,9 @@
         selected-value (.-value selected)]
     (reset! button "Loading")
     (if (= selected-value "trump")
-      (reset! chain-two nil)
+      (do
+        (reset! chain-two nil)
+        (reset! button "Generate"))
       (gen/load-text selected-value (gen/handler-load-atom chain-two button)))))
 
 (defn clicked []
